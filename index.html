@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stochastic Drills: free stochastic calculus practice problems</title>
+<meta name="description" content="357 free practice problems in probability and stochastic calculus across 17 topics, each with a worked solution. No sign-up.">
+<meta property="og:title" content="Stochastic Drills">
+<meta property="og:description" content="357 free practice problems in probability and stochastic calculus across 17 topics, each with a worked solution. No sign-up.">
+<meta property="og:type" content="website">
+<style>
+:root { color-scheme: light; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; } img { max-width: 100%; } [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: paper canvas, white cards, teal accent; topic rail on the left, problems on the right. */
+:root {
+  --bg: #f4f3ee; --surface: #ffffff; --tint: #edebe3; --inset: #faf9f5;
+  --ink: #26241f; --ink-2: #514e45; --ink-3: #625e55; --ink-4: #706b60;
+  --line: #e4e1d8; --line-strong: #d3cfc4; --line-input: #878276;
+  --accent: #89acb2; --accent-hover: #6f979c; --accent-fg: #1c1c1a; --accent-text: #4d6f74; --accent-soft: #dce9e8; --path: #4d8990;
+  --easy: #3d6b52; --med: #855c1c; --hard: #a24a36;
+  --easy-soft: color-mix(in srgb, var(--easy) 14%, var(--surface));
+  --med-soft: color-mix(in srgb, var(--med) 14%, var(--surface));
+  --hard-soft: color-mix(in srgb, var(--hard) 12%, var(--surface));
+  --shadow-sm: 0 1px 2px rgba(38, 36, 31, 0.04), 0 1px 3px rgba(38, 36, 31, 0.06);
+  --ui: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r-sm: 8px; --r-md: 12px; --r-lg: 16px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #16150f; --surface: #1e1d16; --tint: #2a281f; --inset: #26241c;
+    --ink: #f1efe6; --ink-2: #cdc9bc; --ink-3: #b4afa2; --ink-4: #958f80;
+    --line: #322f26; --line-strong: #3f3b30; --line-input: #7a7463;
+    --accent: #89acb2; --accent-hover: #9fbdc2; --accent-fg: #16150f; --accent-text: #89acb2; --accent-soft: #2c3836; --path: #88c9d4;
+    --easy: #7db390; --med: #cf9a52; --hard: #d9806b;
+    --easy-soft: color-mix(in srgb, var(--easy) 18%, var(--surface));
+    --med-soft: color-mix(in srgb, var(--med) 18%, var(--surface));
+    --hard-soft: color-mix(in srgb, var(--hard) 16%, var(--surface));
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #16150f; --surface: #1e1d16; --tint: #2a281f; --inset: #26241c;
+  --ink: #f1efe6; --ink-2: #cdc9bc; --ink-3: #b4afa2; --ink-4: #958f80;
+  --line: #322f26; --line-strong: #3f3b30; --line-input: #7a7463;
+  --accent: #89acb2; --accent-hover: #9fbdc2; --accent-fg: #16150f; --accent-text: #89acb2; --accent-soft: #2c3836; --path: #88c9d4;
+  --easy: #7db390; --med: #cf9a52; --hard: #d9806b;
+  --easy-soft: color-mix(in srgb, var(--easy) 18%, var(--surface));
+  --med-soft: color-mix(in srgb, var(--med) 18%, var(--surface));
+  --hard-soft: color-mix(in srgb, var(--hard) 16%, var(--surface));
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--ui); font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 2px; border-radius: 4px; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 20px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+/* top bar */
+.top { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; margin-right: auto; min-width: 0; }
+.brand canvas { width: 54px; height: 34px; display: block; flex: none; }
+.prod { min-width: 0; }
+.prod b { display: block; font-weight: 700; font-size: 18px; letter-spacing: -0.02em; line-height: 1.2; }
+.prod span { font-size: 12px; color: var(--ink-3); }
+.meters { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; }
+.meter { min-width: 84px; }
+.meter .lab { display: flex; justify-content: space-between; gap: 10px; font-size: 12px; color: var(--ink-3); }
+.meter .lab b { font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ink); }
+.bar { height: 5px; border-radius: 3px; background: var(--tint); margin-top: 4px; overflow: hidden; }
+.bar i { display: block; height: 100%; border-radius: 3px; background: var(--accent); width: 0; }
+.bar.easy i { background: var(--easy); } .bar.medium i { background: var(--med); } .bar.hard i { background: var(--hard); }
+.btn { display: inline-block; text-decoration: none; border: 1px solid var(--line-strong); background: var(--surface); border-radius: var(--r-md); padding: 8px 14px; font-weight: 600; font-size: 14px; box-shadow: var(--shadow-sm); }
+.btn:hover { background: var(--inset); border-color: var(--ink-4); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+.btn.primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+.btn.quiet { border-color: transparent; background: transparent; color: var(--ink-2); padding-inline: 8px; box-shadow: none; font-weight: 500; }
+.btn.quiet:hover { color: var(--ink); background: var(--tint); }
+.btn:disabled { opacity: 0.45; cursor: default; }
+
+/* layout */
+.layout { display: grid; grid-template-columns: 268px minmax(0, 1fr); gap: 32px; margin-top: 24px; align-items: start; }
+.rail { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); max-height: calc(100vh - 40px); overflow-y: auto; padding-right: 4px; }
+.rail h2 { font-size: 12px; font-weight: 500; color: var(--ink-3); margin: 0 0 8px 10px; }
+.rail ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.topic { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; width: 100%; text-align: left; text-decoration: none;
+  padding: 8px 10px; border-radius: var(--r-sm); border: 0; background: transparent; }
+.topic:hover { background: var(--tint); }
+.topic[aria-current="true"] { background: var(--accent-soft); }
+.topic .n { font-weight: 500; font-size: 14px; overflow-wrap: anywhere; }
+.topic[aria-current="true"] .n { font-weight: 600; }
+.topic .c { font-size: 12px; color: var(--ink-3); font-variant-numeric: tabular-nums; align-self: center; }
+.topic .bar { grid-column: 1 / -1; height: 3px; margin-top: 3px; }
+main { min-width: 0; }
+
+/* list view */
+.head h1 { font-weight: 700; font-size: clamp(28px, 24.7px + 0.88vw, 36px); line-height: 1.12; letter-spacing: -0.03em; margin: 0; text-wrap: balance; }
+.head p { margin: 8px 0 0; color: var(--ink-2); max-width: 68ch; font-size: 16px; }
+.path { margin-top: 16px; }
+.path canvas { width: 100%; height: 64px; display: block; }
+.path figcaption { font-size: 12px; color: var(--ink-4); margin-top: 2px; font-variant-numeric: tabular-nums; }
+.filters { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; margin: 20px 0 12px; }
+.seg { display: inline-flex; border: 1px solid var(--line-strong); border-radius: var(--r-sm); overflow: hidden; background: var(--surface); }
+.seg button { border: 0; background: transparent; padding: 6px 12px; font-size: 13px; color: var(--ink-2); border-right: 1px solid var(--line); }
+.seg button:last-child { border-right: 0; }
+.seg button[aria-pressed="true"] { background: var(--accent-soft); color: var(--ink); font-weight: 600; }
+.filters input[type="search"], .filters select { border: 1px solid var(--line-input); background: var(--surface); border-radius: var(--r-sm); padding: 6px 10px; font-size: 13px; min-width: 0; }
+.filters input[type="search"] { flex: 1 1 160px; max-width: 280px; }
+.count { margin-left: auto; font-size: 13px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.list { list-style: none; margin: 0; padding: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-sm); }
+.row { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 11px 16px; text-decoration: none; border-top: 1px solid var(--line); }
+li:first-child > .row { border-top: 0; }
+.row:hover { background: var(--inset); }
+.row .t { font-weight: 600; overflow-wrap: anywhere; }
+.row .sub { display: block; font-size: 12px; color: var(--ink-3); font-weight: 400; }
+.mark { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--line-strong); display: grid; place-items: center; font-size: 11px; line-height: 1; font-weight: 700; }
+.mark.ok { background: var(--easy); border-color: var(--easy); color: var(--surface); }
+.mark.miss { background: var(--hard); border-color: var(--hard); color: var(--surface); }
+.pill { font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+.pill.easy { color: var(--easy); background: var(--easy-soft); }
+.pill.medium { color: var(--med); background: var(--med-soft); }
+.pill.hard { color: var(--hard); background: var(--hard-soft); }
+.empty { padding: 28px 16px; text-align: center; color: var(--ink-2); background: var(--surface); border: 1px dashed var(--line-strong); border-radius: var(--r-lg); }
+.foot { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; font-size: 13px; color: var(--ink-3); }
+
+/* problem view */
+.crumb { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; font-size: 13px; color: var(--ink-2); }
+.crumb a { text-decoration: none; font-weight: 600; color: var(--accent-text); }
+.crumb a:hover { text-decoration: underline; }
+.crumb .pos { margin-left: auto; font-size: 12px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.q h1 { font-weight: 700; font-size: clamp(24px, 22.3px + 0.44vw, 28px); line-height: 1.18; letter-spacing: -0.03em; margin: 14px 0 8px; text-wrap: balance; }
+.metaRow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.tag { font-size: 12px; color: var(--ink-2); background: var(--tint); border-radius: 999px; padding: 2px 9px; }
+.prose { font-size: 16px; line-height: 1.6; max-width: 760px; color: var(--ink); }
+.prose mjx-container[display="true"] { margin: 0.4em 0 !important; }
+.prose p { margin: 0 0 0.75em; }
+.prose p, .prose li, .trap .prose, .choice .prose { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+.q, .sol, .choices, .prompt { min-width: 0; }
+.prose p:last-child { margin-bottom: 0; }
+.prose ul, .prose ol { margin: 0 0 0.75em; padding-left: 1.3em; }
+.prose li { margin: 0.2em 0; }
+.prose .dm { display: block; margin: 0.6em 0; overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+.prose pre { font-family: var(--mono); font-size: 13px; line-height: 1.5; background: var(--inset); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 12px 14px; overflow-x: auto; margin: 0 0 0.75em; }
+.prose code { font-family: var(--mono); font-size: 0.86em; background: var(--tint); padding: 1px 5px; border-radius: 4px; }
+.prose pre code { background: transparent; padding: 0; font-size: inherit; }
+mjx-container { max-width: 100%; }
+.prompt { margin-top: 18px; font-size: 18px; }
+.choices { display: grid; gap: 10px; margin-top: 22px; max-width: 760px; }
+.choice { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 12px; align-items: center; text-align: left; width: 100%;
+  background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--r-md); padding: 12px 14px; box-shadow: var(--shadow-sm); }
+.choice:not(:disabled):hover { border-color: var(--accent-hover); background: var(--inset); }
+.choice .k { width: 28px; height: 28px; border-radius: var(--r-sm); background: var(--tint); display: grid; place-items: center; font-size: 13px; font-weight: 600; }
+.choice:disabled { cursor: default; color: var(--ink); opacity: 1; box-shadow: none; }
+.choice.right { border-color: var(--easy); background: var(--easy-soft); }
+.choice.right .k { background: var(--easy); color: var(--surface); }
+.choice.wrong { border-color: var(--hard); background: var(--hard-soft); }
+.choice.wrong .k { background: var(--hard); color: var(--surface); }
+.choice.dim { opacity: 0.62; }
+.verdict { margin-top: 20px; font-weight: 600; font-size: 16px; }
+.verdict.ok { color: var(--easy); } .verdict.miss { color: var(--hard); }
+.sol { margin-top: 14px; border-top: 1px solid var(--line); padding-top: 18px; max-width: 760px; }
+.sol h2 { font-size: 12px; font-weight: 600; color: var(--ink-3); margin: 0 0 8px; }
+.trap { margin-top: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); padding: 12px 14px; }
+.trap .prose { font-size: 14px; color: var(--ink-2); }
+.nav { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; align-items: center; }
+.nav .sp { margin-left: auto; }
+.hint { font-size: 12px; color: var(--ink-4); margin-top: 14px; }
+kbd { font-family: var(--mono); font-size: 11px; border: 1px solid var(--line-strong); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; background: var(--surface); }
+.confirm { display: inline-flex; gap: 8px; align-items: center; }
+
+
+/* progress dashboard */
+.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 20px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 14px 16px; box-shadow: var(--shadow-sm); min-width: 0; }
+.stat .v { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.stat .v small { font-size: 13px; font-weight: 500; color: var(--ink-3); letter-spacing: 0; }
+.stat .l { font-size: 12px; color: var(--ink-3); margin-top: 2px; }
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 16px; box-shadow: var(--shadow-sm); min-width: 0; }
+.panel h2, .sec { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 4px; }
+.panel .note { font-size: 13px; color: var(--ink-3); margin: 0 0 8px; }
+.panel ul { list-style: none; margin: 0; padding: 0; }
+.panel li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding: 9px 0; border-top: 1px solid var(--line); }
+.panel li b { font-weight: 600; flex: 1 1 150px; min-width: 0; overflow-wrap: anywhere; }
+.panel li .num { font-variant-numeric: tabular-nums; color: var(--ink-2); font-size: 13px; }
+.linkbtn { border: 0; background: transparent; padding: 0; color: var(--accent-text); font-weight: 600; font-size: 13px; text-decoration: none; }
+.linkbtn:hover { text-decoration: underline; }
+.sec { margin: 28px 0 4px; }
+.secnote { font-size: 13px; color: var(--ink-3); margin: 0 0 10px; max-width: 70ch; }
+.ttable { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--shadow-sm); overflow: hidden; }
+.trow { display: grid; grid-template-columns: minmax(0, 1.5fr) 56px minmax(120px, 1fr) 150px 112px; gap: 14px; align-items: center; padding: 10px 16px; border-top: 1px solid var(--line); }
+.trow:first-child { border-top: 0; }
+.trow.hd { font-size: 12px; color: var(--ink-3); background: var(--inset); padding-block: 8px; }
+.trow a.nm { font-weight: 600; text-decoration: none; overflow-wrap: anywhere; }
+.trow a.nm:hover { color: var(--accent-text); text-decoration: underline; }
+.trow .cov, .trow .emh { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.acc { display: grid; grid-template-columns: minmax(0, 1fr) 40px; gap: 10px; align-items: center; }
+.acc .bar { margin: 0; height: 8px; border-radius: 4px; }
+.acc .bar i { background: var(--path); border-radius: 4px; }
+.acc span { font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; text-align: right; }
+.acc span.na { font-weight: 400; color: var(--ink-4); }
+.trow .lab { justify-self: start; }
+@media (max-width: 860px) {
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cols { grid-template-columns: minmax(0, 1fr); }
+  .trow { grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px; }
+  .trow.hd { display: none; }
+  .trow .acc { grid-column: 1 / -1; }
+  .trow .cov::after { content: " answered"; }
+  .trow .emh { grid-column: 1; }
+}
+@media (max-width: 860px) {
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .rail { position: static; max-height: none; overflow: visible; padding: 0; }
+  .rail ul { flex-direction: row; overflow-x: auto; gap: 6px; padding-bottom: 6px; }
+  .rail li { flex: 0 0 auto; }
+  .topic { width: auto; grid-template-columns: auto auto; border: 1px solid var(--line-strong); background: var(--surface); padding: 6px 10px; border-radius: 999px; }
+  .topic .n { white-space: nowrap; }
+  .topic .bar { display: none; }
+  .prompt { font-size: 16px; }
+  .count { margin-left: 0; width: 100%; }
+  .hint { display: none; }
+}
+@media (prefers-reduced-motion: no-preference) { .bar i { transition: width 0.35s ease; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#all" aria-label="Stochastic Drills, all topics">
+      <canvas id="mark" width="108" height="68" aria-hidden="true"></canvas>
+      <div class="prod"><b>Stochastic Drills</b></div>
+    </a>
+    <div class="meters" id="meters" aria-label="Your progress"></div>
+    <div class="actions"><a class="btn" href="#progress">My progress</a><button class="btn" id="random" type="button">Random problem</button></div>
+  </header>
+  <div class="layout">
+    <nav class="rail" aria-label="Topics"><h2>Topics</h2><ul id="topics"></ul></nav>
+    <main id="main" aria-live="polite"><p class="empty">Loading the problem bank.</p></main>
+  </div>
+</div>
+
+<script>
+window.MathJax = {
+  tex: { inlineMath: [["\\(", "\\)"]], displayMath: [["\\[", "\\]"]] },
+  svg: { fontCache: "global" },
+  options: { skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] },
+  startup: { typeset: false, ready: function () { MathJax.startup.defaultReady(); MathJax.startup.promise.then(function () { window.__mj = true; if (window.__typesetAll) window.__typesetAll(); }); } }
+};
+</script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg-full.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  var KEY = "stochastic-drills:v1";
+  var DIFFS = ["easy", "medium", "hard"];
+  var LETTERS = ["A", "B", "C", "D"];
+  var bank = null, byId = {}, progress = {}, view = { diff: "all", status: "all", search: "" };
+  var main = document.getElementById("main");
+
+  // ---------- storage (per browser; the page works without it)
+  function load() { try { var v = JSON.parse(localStorage.getItem(KEY) || "{}"); progress = v.progress || {}; if (v.view) { view.diff = v.view.diff || "all"; view.status = v.view.status || "all"; } } catch (e) { progress = {}; } }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify({ progress: progress, view: { diff: view.diff, status: view.status } })); } catch (e) {} }
+
+  // ---------- tiny markdown + math
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function md(src, inline) {
+    var slots = [];
+    function hold(html, block) { slots.push({ html: html, block: !!block }); return "\u0001" + (slots.length - 1) + "\u0001"; }
+    var s = String(src == null ? "" : src).replace(/\r/g, "");
+    s = s.replace(/```[a-zA-Z]*\n?([\s\S]*?)```/g, function (m, c) { return "\n" + hold("<pre><code>" + esc(c.replace(/\n+$/, "")) + "</code></pre>", true) + "\n"; });
+    s = s.replace(/`([^`\n]+)`/g, function (m, c) { return hold("<code>" + esc(c) + "</code>"); });
+    s = s.replace(/\\\$/g, function () { return hold("$"); });
+    s = s.replace(/\$\$([\s\S]+?)\$\$/g, function (m, c) { return hold('<span class="dm">\\[' + esc(c) + "\\]</span>"); });
+    s = s.replace(/\$([^$\n]+?)\$/g, function (m, c) { return hold("\\(" + esc(c) + "\\)"); });
+    s = esc(s);
+    s = s.replace(/\*\*([^*\n]+)\*\*/g, "<strong>$1</strong>").replace(/(^|[^*\w])\*([^*\n]+)\*(?!\w)/g, "$1<em>$2</em>");
+    var out = [], para = [], list = null;
+    function flushP() { if (para.length) { out.push(inline ? para.join(" ") : "<p>" + para.join("<br>") + "</p>"); para = []; } }
+    function flushL() { if (list) { out.push("<" + list.t + ">" + list.items.map(function (i) { return "<li>" + i + "</li>"; }).join("") + "</" + list.t + ">"); list = null; } }
+    s.split("\n").forEach(function (line) {
+      var m;
+      if (!line.trim()) { flushP(); if (list) list.gap = true; return; }
+      if ((m = line.match(/^\u0001(\d+)\u0001$/)) && slots[+m[1]].block) { flushP(); flushL(); out.push(line); return; }
+      if ((m = line.match(/^\s*[-*]\s+(.*)$/))) { flushP(); if (!list || list.t !== "ul") { flushL(); list = { t: "ul", items: [] }; } list.items.push(m[1]); return; }
+      if ((m = line.match(/^\s*\d+[.)]\s+(.*)$/))) { flushP(); if (!list || list.t !== "ol") { flushL(); list = { t: "ol", items: [] }; } list.items.push(m[1]); return; }
+      if (list && /^\s{2,}\S/.test(line)) { list.items[list.items.length - 1] += " " + line.trim(); return; }
+      flushL(); para.push(line);
+    });
+    flushP(); flushL();
+    var html = out.join(inline ? " " : "");
+    for (var i = 0; i < 3; i++) html = html.replace(/\u0001(\d+)\u0001/g, function (m, n) { return slots[+n].html; });
+    return html;
+  }
+  function typeset(el) { if (window.__mj && window.MathJax && MathJax.typesetPromise) { MathJax.typesetPromise([el]).catch(function () {}); } }
+  window.__typesetAll = function () { typeset(main); };
+
+  // ---------- helpers
+  function h(tag, attrs, html) { var e = document.createElement(tag); for (var k in attrs || {}) { if (k === "class") e.className = attrs[k]; else e.setAttribute(k, attrs[k]); } if (html != null) e.innerHTML = html; return e; }
+  function statusOf(q) { var p = progress[q.id]; return p ? (p.ok ? "ok" : "miss") : "todo"; }
+  function topicOf(slug) { for (var i = 0; i < bank.topics.length; i++) if (bank.topics[i].slug === slug) return bank.topics[i]; return null; }
+  function route() { var x = (location.hash || "").replace(/^#/, ""); if (x === "progress") return { dash: true }; if (x.indexOf("q-") === 0 && byId[x.slice(2)]) return { q: x.slice(2) }; if (x.indexOf("t-") === 0 && topicOf(x.slice(2))) return { topic: x.slice(2) }; return { topic: "all" }; }
+  function filtered(topic) {
+    var needle = view.search.trim().toLowerCase();
+    return bank.questions.filter(function (q) {
+      if (topic !== "all" && q.topic !== topic) return false;
+      if (view.diff !== "all" && q.difficulty !== view.diff) return false;
+      if (view.status !== "all" && statusOf(q) !== view.status) return false;
+      if (needle && (q.title + " " + (q.tags || []).join(" ") + " " + q.prompt).toLowerCase().indexOf(needle) < 0) return false;
+      return true;
+    });
+  }
+  var lastTopic = "all";
+
+  // ---------- header meters and topic rail
+  function renderChrome(activeTopic) {
+    var m = document.getElementById("meters"); m.innerHTML = "";
+    var tot = { all: [0, 0] }; DIFFS.forEach(function (d) { tot[d] = [0, 0]; });
+    var attempts = 0, firstOk = 0;
+    bank.questions.forEach(function (q) { tot.all[1]++; tot[q.difficulty][1]++; var p = progress[q.id]; if (p) { attempts++; if (p.ok) { firstOk++; tot.all[0]++; tot[q.difficulty][0]++; } } });
+    [["all", "Solved"], ["easy", "Easy"], ["medium", "Medium"], ["hard", "Hard"]].forEach(function (r) {
+      var t = tot[r[0]], el = h("div", { class: "meter" }, '<div class="lab"><span>' + r[1] + "</span><b>" + t[0] + " / " + t[1] + '</b></div><div class="bar ' + r[0] + '"><i style="width:' + (t[1] ? (100 * t[0] / t[1]).toFixed(1) : 0) + '%"></i></div>');
+      m.appendChild(el);
+    });
+    var ul = document.getElementById("topics"); ul.innerHTML = "";
+    [{ slug: "all", name: "All topics" }].concat(bank.topics).forEach(function (t) {
+      var qs = bank.questions.filter(function (q) { return t.slug === "all" || q.topic === t.slug; });
+      var done = qs.filter(function (q) { return statusOf(q) === "ok"; }).length;
+      var a = h("a", { class: "topic", href: t.slug === "all" ? "#all" : "#t-" + t.slug }, '<span class="n">' + esc(t.name) + '</span><span class="c">' + done + "/" + qs.length + '</span><div class="bar"><i style="width:' + (qs.length ? 100 * done / qs.length : 0) + '%"></i></div>');
+      if (t.slug === activeTopic) a.setAttribute("aria-current", "true");
+      var li = document.createElement("li"); li.appendChild(a); ul.appendChild(li);
+    });
+    var cur = ul.querySelector('[aria-current="true"]'); if (cur && cur.scrollIntoView && window.matchMedia("(max-width: 860px)").matches) cur.scrollIntoView({ block: "nearest", inline: "center" });
+  }
+
+  // ---------- list view
+  function renderList(topic) {
+    lastTopic = topic; renderChrome(topic);
+    var t = topic === "all" ? { name: "All problems" } : topicOf(topic);
+    main.innerHTML = "";
+    var head = h("div", { class: "head" }, "<h1>" + esc(t.name) + "</h1>");
+    if (topic === "all") { var fig = h("figure", { class: "path", style: "margin-inline:0;margin-bottom:0" }, '<canvas id="path" aria-hidden="true"></canvas>'); head.appendChild(fig); }
+    main.appendChild(head);
+    var f = h("div", { class: "filters" });
+    var seg = h("div", { class: "seg", role: "group", "aria-label": "Difficulty" });
+    [["all", "All"], ["easy", "Easy"], ["medium", "Medium"], ["hard", "Hard"]].forEach(function (d) { var b = h("button", { type: "button", "aria-pressed": String(view.diff === d[0]) }, d[1]); b.onclick = function () { view.diff = d[0]; save(); renderList(topic); }; seg.appendChild(b); });
+    f.appendChild(seg);
+    var sel = h("select", { id: "status", "aria-label": "Status" }, '<option value="all">Any status</option><option value="todo">Not attempted</option><option value="ok">Solved</option><option value="miss">Missed</option>');
+    sel.value = view.status; sel.onchange = function () { view.status = sel.value; save(); renderList(topic); }; f.appendChild(sel);
+    var inp = h("input", { id: "search", type: "search", placeholder: "Search titles and tags", "aria-label": "Search problems" }); inp.value = view.search;
+    f.appendChild(inp);
+    var count = h("span", { class: "count" }); f.appendChild(count);
+    main.appendChild(f);
+    var holder = h("div"); main.appendChild(holder);
+    function draw() {
+      var qs = filtered(topic); count.textContent = qs.length + (qs.length === 1 ? " problem" : " problems");
+      holder.innerHTML = "";
+      if (!qs.length) { holder.appendChild(h("p", { class: "empty" }, "No problems match these filters. Clear the search or switch difficulty.")); return; }
+      var ul = h("ul", { class: "list" });
+      qs.forEach(function (q) {
+        var st = statusOf(q), tp = topicOf(q.topic);
+        var sub = (topic === "all" ? esc(tp.name) : (q.tags || []).slice(0, 2).map(esc).join(" \u00b7 "));
+        var a = h("a", { class: "row", href: "#q-" + q.id }, '<span class="mark ' + (st === "todo" ? "" : st) + '" title="' + (st === "ok" ? "Solved" : st === "miss" ? "Missed" : "Not attempted") + '">' + (st === "ok" ? "\u2713" : st === "miss" ? "\u2715" : "") + '</span><span class="t">' + esc(q.title) + '<span class="sub">' + sub + '</span></span><span class="pill ' + q.difficulty + '">' + q.difficulty.charAt(0).toUpperCase() + q.difficulty.slice(1) + "</span>");
+        var li = document.createElement("li"); li.appendChild(a); ul.appendChild(li);
+      });
+      holder.appendChild(ul);
+    }
+    inp.oninput = function () { view.search = inp.value; draw(); };
+    draw();
+    var foot = h("div", { class: "foot" });
+    var reset = h("button", { class: "btn quiet", type: "button" }, "Reset my progress");
+    reset.onclick = function () {
+      var c = h("span", { class: "confirm" }, "<span>Erase all answers?</span>"); var y = h("button", { class: "btn", type: "button" }, "Erase"); var n = h("button", { class: "btn quiet", type: "button" }, "Keep");
+      y.onclick = function () { progress = {}; save(); renderList(topic); }; n.onclick = function () { c.replaceWith(reset); };
+      c.appendChild(y); c.appendChild(n); reset.replaceWith(c);
+    };
+    foot.appendChild(reset); main.appendChild(foot);
+    if (topic === "all") drawPath(document.getElementById("path"), todaySeed(), true);
+  }
+
+  // ---------- problem view
+  function renderQuestion(id) {
+    var q = byId[id], tp = topicOf(q.topic);
+    var scope = filtered(lastTopic === "all" || lastTopic === q.topic ? lastTopic : q.topic);
+    if (scope.indexOf(q) < 0) scope = bank.questions.filter(function (x) { return x.topic === q.topic; });
+    var i = scope.indexOf(q), prev = scope[i - 1], next = scope[i + 1];
+    renderChrome(q.topic);
+    main.innerHTML = "";
+    var art = h("article", { class: "q" });
+    art.appendChild(h("div", { class: "crumb" }, '<a href="' + (lastTopic === "all" ? "#all" : "#t-" + q.topic) + '">Back to ' + esc(lastTopic === "all" ? "all problems" : tp.name) + '</a><span class="pos">' + (i + 1) + " of " + scope.length + "</span>"));
+    art.appendChild(h("h1", {}, esc(q.title)));
+    art.appendChild(h("div", { class: "metaRow" }, '<span class="pill ' + q.difficulty + '">' + q.difficulty.charAt(0).toUpperCase() + q.difficulty.slice(1) + "</span>" + '<span class="tag">' + esc(tp.name) + "</span>" + (q.tags || []).slice(0, 2).map(function (t) { return '<span class="tag">' + esc(t) + "</span>"; }).join("")));
+    art.appendChild(h("div", { class: "prose prompt" }, md(q.prompt)));
+    var box = h("div", { class: "choices", role: "group", "aria-label": "Answer choices" });
+    var buttons = q.choices.map(function (c, k) {
+      var b = h("button", { class: "choice", type: "button", id: "choice-" + k }, '<span class="k">' + LETTERS[k] + '</span><span class="prose">' + md(c, true) + "</span>");
+      b.onclick = function () { answer(k); }; box.appendChild(b); return b;
+    });
+    art.appendChild(box);
+    var after = h("div"); art.appendChild(after);
+    var nav = h("div", { class: "nav" });
+    var bPrev = h("a", { class: "btn", href: prev ? "#q-" + prev.id : "#" }, "Previous"); if (!prev) { bPrev.setAttribute("aria-disabled", "true"); bPrev.style.opacity = 0.45; bPrev.style.pointerEvents = "none"; }
+    var bNext = h("a", { class: "btn primary", href: next ? "#q-" + next.id : (lastTopic === "all" ? "#all" : "#t-" + q.topic) }, next ? "Next problem" : "Back to the list");
+    var bRetry = h("button", { class: "btn quiet sp", type: "button" }, "Clear my answer");
+    bRetry.onclick = function () { delete progress[q.id]; save(); renderQuestion(id); };
+    nav.appendChild(bPrev); nav.appendChild(bNext); nav.appendChild(bRetry); art.appendChild(nav);
+    main.appendChild(art);
+
+    function reveal(chosen, fresh) {
+      buttons.forEach(function (b, k) { b.disabled = true; if (k === q.answer) b.classList.add("right"); else if (k === chosen) b.classList.add("wrong"); else b.classList.add("dim"); });
+      var ok = chosen === q.answer;
+      after.innerHTML = "";
+      after.appendChild(h("p", { class: "verdict " + (ok ? "ok" : "miss"), role: "status" }, ok ? "Correct." : "Not quite. The answer is " + LETTERS[q.answer] + "."));
+      var sol = h("section", { class: "sol" }, "<h2>Worked solution</h2>"); sol.appendChild(h("div", { class: "prose" }, md(q.solution)));
+      if (q.trap) { var tr = h("div", { class: "trap" }, "<h2>Common trap</h2>"); tr.appendChild(h("div", { class: "prose" }, md(q.trap))); sol.appendChild(tr); }
+      after.appendChild(sol); bRetry.hidden = false; typeset(after);
+      if (fresh) { renderChrome(q.topic); }
+    }
+    function answer(k) { if (progress[q.id]) return; progress[q.id] = { a: k, ok: k === q.answer, t: Date.now() }; save(); reveal(k, true); }
+    art.__answer = answer; art.__next = bNext.getAttribute("href"); art.__prev = prev ? "#q-" + prev.id : null;
+    var p = progress[q.id];
+    if (p) reveal(p.a, false); else bRetry.hidden = true;
+    typeset(art); window.scrollTo(0, 0);
+  }
+
+
+  // ---------- progress dashboard
+  var MIN = 4;
+  function dayKey(ts) { var d = new Date(ts); return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate(); }
+  function streak() { var days = {}; Object.keys(progress).forEach(function (id) { days[dayKey(progress[id].t)] = 1; }); var n = 0, d = new Date(); if (!days[dayKey(d.getTime())]) d.setDate(d.getDate() - 1); while (days[dayKey(d.getTime())]) { n++; d.setDate(d.getDate() - 1); } return n; }
+  function goTopic(slug, status) { view.status = status; view.diff = "all"; view.search = ""; save(); location.hash = "t-" + slug; }
+  function topicStats() {
+    return bank.topics.map(function (t) {
+      var s = { t: t, n: 0, att: 0, ok: 0, d: { easy: [0, 0], medium: [0, 0], hard: [0, 0] }, todo: [], miss: [] };
+      bank.questions.forEach(function (q) { if (q.topic !== t.slug) return; s.n++; var p = progress[q.id]; if (!p) { s.todo.push(q); return; } s.att++; s.d[q.difficulty][0]++; if (p.ok) { s.ok++; s.d[q.difficulty][1]++; } else s.miss.push(q); });
+      s.acc = s.att ? s.ok / s.att : null;
+      s.kind = s.att < MIN ? "none" : s.acc >= 0.75 ? "strong" : s.acc <= 0.5 ? "weak" : "steady";
+      return s;
+    });
+  }
+  function renderDashboard() {
+    lastTopic = "all"; renderChrome("none");
+    var per = topicStats(), att = 0, ok = 0, hardOk = 0, hardAtt = 0;
+    per.forEach(function (s) { att += s.att; ok += s.ok; hardAtt += s.d.hard[0]; hardOk += s.d.hard[1]; });
+    main.innerHTML = "";
+    main.appendChild(h("div", { class: "head" }, "<h1>My progress</h1>"));
+    if (!att) {
+      var e = h("div", { class: "empty", style: "margin-top:20px" }, "<p style=\"margin:0 0 12px\">No answers yet.</p>");
+      var b0 = h("button", { class: "btn primary", type: "button" }, "Try a random problem"); b0.onclick = function () { document.getElementById("random").click(); };
+      e.appendChild(b0); main.appendChild(e); window.scrollTo(0, 0); return;
+    }
+    var st = streak();
+    var stats = h("div", { class: "stats" });
+    [[att + " <small>of " + bank.questions.length + "</small>", "Problems answered"], [Math.round(100 * ok / att) + "%", "First-try accuracy"], [hardOk + " <small>of " + hardAtt + " tried</small>", "Hard problems solved"], [st + " <small>" + (st === 1 ? "day" : "days") + "</small>", "Current streak"]].forEach(function (x) { stats.appendChild(h("div", { class: "stat" }, '<div class="v">' + x[0] + '</div><div class="l">' + x[1] + "</div>")); });
+    main.appendChild(stats);
+
+    var strong = per.filter(function (s) { return s.kind === "strong"; }).sort(function (a, b) { return b.acc - a.acc || b.att - a.att; }).slice(0, 3);
+    var weak = per.filter(function (s) { return s.kind === "weak"; }).sort(function (a, b) { return a.acc - b.acc || b.att - a.att; }).slice(0, 3);
+    var cols = h("div", { class: "cols" });
+    function panel(title, note, items, emptyText, action) {
+      var pn = h("section", { class: "panel" }, "<h2>" + title + "</h2>");
+      if (!items.length) { pn.appendChild(h("p", { class: "note", style: "margin:0" }, emptyText)); return pn; }
+      var ul = document.createElement("ul");
+      items.forEach(function (s) {
+        var li = h("li", {}, "<b>" + esc(s.t.name) + '</b><span class="num">' + s.ok + " of " + s.att + " correct (" + Math.round(100 * s.acc) + "%)</span>");
+        var a = action(s); if (a) li.appendChild(a); ul.appendChild(li);
+      });
+      pn.appendChild(ul); return pn;
+    }
+    cols.appendChild(panel("Strengths", "75% or better on the first try.", strong, "None yet.", function (s) {
+      if (!s.todo.length) return null; var b = h("button", { class: "linkbtn", type: "button" }, s.todo.length + " left to try"); b.onclick = function () { goTopic(s.t.slug, "todo"); }; return b;
+    }));
+    cols.appendChild(panel("Needs work", "50% or lower on the first try.", weak, "None yet.", function (s) {
+      var b = h("button", { class: "linkbtn", type: "button" }, "Review " + s.miss.length + " missed"); b.onclick = function () { goTopic(s.t.slug, "miss"); }; return b;
+    }));
+    main.appendChild(cols);
+
+    // what to do next: missed problems in weak topics first, then the easiest untried problem in the least covered topics
+    var next = [];
+    weak.forEach(function (s) { if (s.todo.length) next.push([s.todo[0], ""]); });
+    per.slice().sort(function (a, b) { return a.att - b.att; }).forEach(function (s) { if (next.length < 3 && s.todo.length && weak.indexOf(s) < 0) next.push([s.todo[0], ""]); });
+    if (next.length) {
+      main.appendChild(h("h2", { class: "sec" }, "Suggested next"));
+      var ul2 = h("ul", { class: "list" });
+      next.slice(0, 3).forEach(function (x) { var q = x[0]; var li = document.createElement("li"); li.appendChild(h("a", { class: "row", href: "#q-" + q.id }, '<span class="mark"></span><span class="t">' + esc(q.title) + '<span class="sub">' + esc(topicOf(q.topic).name) + '</span></span><span class="pill ' + q.difficulty + '">' + q.difficulty.charAt(0).toUpperCase() + q.difficulty.slice(1) + "</span>")); ul2.appendChild(li); });
+      main.appendChild(ul2);
+    }
+
+    main.appendChild(h("h2", { class: "sec" }, "By topic"));
+    var tb = h("div", { class: "ttable" });
+    tb.appendChild(h("div", { class: "trow hd" }, "<span>Topic</span><span>Done</span><span>Accuracy</span><span>Easy / Medium / Hard</span><span>Rating</span>"));
+    per.slice().sort(function (a, b) { return (a.acc === null) - (b.acc === null) || (a.kind === "none") - (b.kind === "none") || a.acc - b.acc; }).forEach(function (s) {
+      var lab = s.kind === "strong" ? '<span class="pill easy lab">Strength</span>' : s.kind === "weak" ? '<span class="pill hard lab">Needs work</span>' : s.kind === "steady" ? '<span class="tag lab">On track</span>' : '<span class="tag lab">' + (s.att ? (MIN - s.att) + " more to rate" : "Not started") + "</span>";
+      var emh = !s.att ? "" : ["easy", "medium", "hard"].map(function (d) { return s.d[d][0] ? s.d[d][1] + "/" + s.d[d][0] : "-"; }).join(" \u00b7 ");
+      tb.appendChild(h("div", { class: "trow" }, '<a class="nm" href="#t-' + s.t.slug + '">' + esc(s.t.name) + '</a><span class="cov">' + s.att + "/" + s.n + '</span><div class="acc"><div class="bar"><i style="width:' + (s.acc === null ? 0 : 100 * s.acc) + '%"></i></div>' + (s.acc === null ? '<span class="na">n/a</span>' : "<span>" + Math.round(100 * s.acc) + "%</span>") + '</div><span class="emh">' + emh + "</span>" + lab));
+    });
+    main.appendChild(tb);
+    window.scrollTo(0, 0);
+  }
+
+  // ---------- Brownian sample paths (the mark and the strip on the home list)
+  function rng(seed) { var a = seed >>> 0; return function () { a = (a + 0x6D2B79F5) >>> 0; var t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+  function todaySeed() { var d = new Date(); return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate(); }
+  function gauss(r) { var u = 0, v = 0; while (u === 0) u = r(); v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
+  function drawPath(cv, seed, withCaption) {
+    if (!cv) return;
+    var css = getComputedStyle(document.documentElement), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w = cv.clientWidth || cv.width / 2, hgt = cv.clientHeight || cv.height / 2;
+    cv.width = Math.round(w * dpr); cv.height = Math.round(hgt * dpr);
+    var ctx = cv.getContext("2d"); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, hgt);
+    var n = withCaption ? Math.max(240, Math.round(w)) : 60, r = rng(seed), W = [0], qv = 0, lo = 0, hi = 0, x = 0, dt = 1 / n;
+    for (var i = 1; i <= n; i++) { var dz = gauss(r) * Math.sqrt(dt); x += dz; qv += dz * dz; W.push(x); if (x < lo) lo = x; if (x > hi) hi = x; }
+    var pad = withCaption ? 6 : 5, span = (hi - lo) || 1;
+    function X(k) { return pad + (w - 2 * pad) * k / n; } function Y(v) { return pad + (hgt - 2 * pad) * (1 - (v - lo) / span); }
+    ctx.strokeStyle = css.getPropertyValue("--line").trim(); ctx.lineWidth = 1; ctx.setLineDash([3, 4]); ctx.beginPath(); ctx.moveTo(pad, Y(0)); ctx.lineTo(w - pad, Y(0)); ctx.stroke(); ctx.setLineDash([]);
+    ctx.strokeStyle = css.getPropertyValue("--path").trim(); ctx.lineWidth = withCaption ? 1.4 : 1.8; ctx.lineJoin = "round"; ctx.beginPath(); ctx.moveTo(X(0), Y(0));
+    for (var k = 1; k <= n; k++) ctx.lineTo(X(k), Y(W[k])); ctx.stroke();
+    ctx.fillStyle = css.getPropertyValue("--path").trim(); ctx.beginPath(); ctx.arc(X(n), Y(W[n]), withCaption ? 3 : 2.6, 0, 6.3); ctx.fill();
+  }
+  function redrawPaths() { drawPath(document.getElementById("mark"), 1905, false); if (document.getElementById("path")) drawPath(document.getElementById("path"), todaySeed(), true); }
+
+  // ---------- wiring
+  function render() { if (!bank) return; var r = route(); if (r.q) renderQuestion(r.q); else if (r.dash) renderDashboard(); else renderList(r.topic); }
+  window.addEventListener("hashchange", render);
+  document.getElementById("random").onclick = function () {
+    var r = route(), topic = r.q ? byId[r.q].topic : (r.topic || "all");
+    var pool = bank.questions.filter(function (q) { return (lastTopic === "all" || q.topic === topic) && !progress[q.id] && (view.diff === "all" || q.difficulty === view.diff); });
+    if (!pool.length) pool = bank.questions.filter(function (q) { return !progress[q.id]; });
+    if (!pool.length) pool = bank.questions;
+    location.hash = "q-" + pool[Math.floor(Math.random() * pool.length)].id;
+  };
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return; var tg = e.target && e.target.tagName; if (tg === "INPUT" || tg === "SELECT" || tg === "TEXTAREA") return;
+    var art = main.querySelector("article.q"); if (!art) return;
+    var k = "abcd".indexOf(e.key.toLowerCase()); if (k < 0) k = "1234".indexOf(e.key);
+    if (k >= 0) { art.__answer(k); e.preventDefault(); }
+    else if (e.key === "ArrowRight" && art.__next) location.hash = art.__next;
+    else if (e.key === "ArrowLeft" && art.__prev) location.hash = art.__prev;
+  });
+  var rz; window.addEventListener("resize", function () { clearTimeout(rz); rz = setTimeout(redrawPaths, 150); });
+  if (window.matchMedia) { var mq = window.matchMedia("(prefers-color-scheme: dark)"); if (mq.addEventListener) mq.addEventListener("change", redrawPaths); }
+  if (window.MutationObserver) new MutationObserver(redrawPaths).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+  load();
+  fetch("bank.json").then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (data) {
+    bank = data; var order = {}; bank.topics.forEach(function (t, i) { order[t.slug] = i; });
+    var dOrder = { easy: 0, medium: 1, hard: 2 };
+    bank.questions.sort(function (a, b) { return (order[a.topic] - order[b.topic]) || (dOrder[a.difficulty] - dOrder[b.difficulty]) || a.id.localeCompare(b.id); });
+    bank.questions.forEach(function (q) { byId[q.id] = q; });
+    Object.keys(progress).forEach(function (id) { if (!byId[id]) delete progress[id]; });
+    var r = route(); if (r.q) lastTopic = byId[r.q].topic;
+    render(); redrawPaths();
+  }).catch(function () { main.innerHTML = '<p class="empty">The problem bank could not be loaded. Reload the page to try again.</p>'; });
+  drawPath(document.getElementById("mark"), 1905, false);
+})();
+</script>
+
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "82ae764c71d24fa2a5c87b5ba0adeec4"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
